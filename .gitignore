@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.venv/
+.deps/
+.scannerwork/
+.pytest_cache/
+coverage.xml
+report.xml
+.coverage
+deployment.rendered.yaml
+version.json
+*kubeconfig*
+.env

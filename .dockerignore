@@ -1,0 +1,17 @@
+.git
+.github
+.venv
+.deps
+.scannerwork
+__pycache__
+.pytest_cache
+tests
+k8s
+monitoring
+docs
+*.md
+Jenkinsfile
+sonar-project.properties
+coverage.xml
+report.xml
+.coverage
