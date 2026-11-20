@@ -11,9 +11,9 @@ pipeline {
   environment {
     IMAGE_REPO  = 'ghcr.io/davidgarciabarboza-15/medisur-api'
     K8S_HOST    = '10.0.1.4'
-    APP_VERSION = '1.0.1.4'
+    APP_VERSION = '1.1.0'
     NAMESPACE   = 'medisur'
-  }
+  } 
 
   stages {
 
