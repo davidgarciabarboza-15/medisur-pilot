@@ -130,7 +130,7 @@ pipeline {
               // Etapa 11: prueba de humo contra el servicio desplegado.
               sh '''
                 curl -fsS --retry 5 --retry-delay 3 "http://10.0.1.4"
-                curl -fsS "http://$K8S_HOST/version" | tee version.json
+                curl -fsS "http://10.0.1.4" | tee version.json
                 grep -q "$GIT_SHA" version.json
               '''
             } catch (err) {
