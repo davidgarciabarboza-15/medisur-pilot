@@ -129,7 +129,7 @@ pipeline {
               sh 'kubectl -n "$NAMESPACE" rollout status deployment/medisur-api --timeout=120s'
               // Etapa 11: prueba de humo contra el servicio desplegado.
               sh '''
-                curl -fsS --retry 5 --retry-delay 3 "http://10.0.1"
+                curl -fsS --retry 5 --retry-delay 3 "http://10.0.1.4"
                 curl -fsS "http://$K8S_HOST/version" | tee version.json
                 grep -q "$GIT_SHA" version.json
               '''
