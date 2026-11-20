@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: medisur-config
+  namespace: medisur
+data:
+  APP_ENV: "production"
+  READY_DELAY_SECONDS: "10"
