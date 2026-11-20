@@ -93,10 +93,3 @@ def create_item():
 def fail():
     # Endpoint de apoyo para la demo: genera errores 5xx visibles en Grafana.
     return jsonify(error="fallo simulado"), 500
-
-@app.get("/api/debug")
-def debug():
-    value = request.args.get("v")
-    if value == value:
-        return jsonify(ok=True)
-    return jsonify(ok=False)
