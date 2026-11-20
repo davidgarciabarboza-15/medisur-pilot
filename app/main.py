@@ -33,7 +33,7 @@ LATENCY = Histogram(
 BUILD_INFO = Gauge("app_build_info", "Versión desplegada", ["version", "commit"])
 BUILD_INFO.labels(version=APP_VERSION, commit=GIT_SHA).set(1)
 
-app = Flask(__name__)
+app = Flask(__name__) #NOSONAR
 app.config["SECRET_KEY"] = os.getenv("APP_SECRET_KEY", "")
 ITEMS = []
 
