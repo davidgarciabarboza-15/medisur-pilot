@@ -60,10 +60,12 @@ pipeline {
       steps {
         withSonarQubeEnv('sonarqube') {
           sh '''
+            mkdir -p .scannerwork
             export SONAR_TOKEN="$SONAR_AUTH_TOKEN"
             docker run --rm --network host --user "$(id -u):$(id -g)" \
               -e SONAR_HOST_URL -e SONAR_TOKEN -e SONAR_USER_HOME=/tmp/.sonar \
               -v "$PWD":/usr/src \
+              -v "$PWD/.scannerwork":/tmp/.scannerwork \
               sonarsource/sonar-scanner-cli \
               -Dsonar.projectVersion="$IMAGE_TAG" -Dsonar.scm.disabled=true
           '''
