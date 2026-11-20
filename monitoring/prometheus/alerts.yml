@@ -1,0 +1,33 @@
+groups:
+  - name: medisur
+    rules:
+      - alert: DiscoPorLlenarse
+        expr: (1 - node_filesystem_avail_bytes{mountpoint="/",fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{mountpoint="/",fstype!~"tmpfs|overlay"}) * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Disco al {{ $value | printf \"%.0f\" }}% en {{ $labels.vm }}"
+
+      - alert: PodEnCicloDeReinicio
+        expr: increase(kube_pod_container_status_restarts_total{namespace="medisur"}[10m]) > 3
+        labels:
+          severity: critical
+        annotations:
+          summary: "El pod {{ $labels.pod }} se reinició más de 3 veces en 10 minutos"
+
+      - alert: ServicioDegradado
+        expr: kube_deployment_status_replicas_available{namespace="medisur",deployment="medisur-api"} < kube_deployment_spec_replicas{namespace="medisur",deployment="medisur-api"}
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "medisur-api tiene menos réplicas listas que las deseadas desde hace 5 minutos"
+
+      - alert: ServicioCaido
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.instance }} no responde"
